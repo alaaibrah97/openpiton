@@ -54,6 +54,8 @@ reg [`AXI4_DATA_WIDTH-1:0] data_in_f;
 wire in_go = in_val & in_rdy;
 wire flit_out_go = flit_out_val & flit_out_rdy;
 
+reg [`NOC_DATA_WIDTH-1:0] resp_header;
+
 always @(posedge clk) begin 
   if(~rst_n) begin
     data_in_f <= {`AXI4_DATA_WIDTH{1'b0}};
@@ -118,7 +120,7 @@ always @(posedge clk) begin
   end
 end
 
-reg [`NOC_DATA_WIDTH-1:0] resp_header;
+
 always @(posedge clk) begin
   if (~rst_n) begin
     resp_header <= `NOC_DATA_WIDTH'b0;
